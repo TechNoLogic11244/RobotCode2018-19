@@ -33,7 +33,7 @@ public class TechNoLogicTeleOp extends OpMode{
     Servo leftClaw;
     Servo rightClaw;
 
-    // don't put llamas as the variable name :)
+    // put llamas as the variable name :)
     final double LEFT_OPEN = 0.3;
     final double RIGHT_OPEN = 0.7;
     final double LEFT_CLOSE = 0.5;
@@ -50,8 +50,8 @@ public class TechNoLogicTeleOp extends OpMode{
         leftClaw = hardwareMap.servo.get("leftClaw");
         rightClaw = hardwareMap.servo.get("rightClaw");
 
-        leftFront.setDirection(DcMotor.Direction.REVERSE);
-        leftRear.setDirection(DcMotor.Direction.REVERSE);
+        rightFront.setDirection(DcMotor.Direction.REVERSE);
+        rightRear.setDirection(DcMotor.Direction.REVERSE);
 
         // Can use this line, but can also use opposites (set one to 0, the other to 1)
         //rightClaw.setDirection(Servo.Direction.REVERSE);
