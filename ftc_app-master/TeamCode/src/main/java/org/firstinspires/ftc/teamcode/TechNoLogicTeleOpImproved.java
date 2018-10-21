@@ -1,12 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.sun.tools.javac.tree.DCTree;
 
 /**
  * This OpMode ramps a single motor speed up and down repeatedly until Stop is pressed.
@@ -20,15 +18,15 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
-@TeleOp(name = "Concept: Ramp Motor Speed", group = "Concept")
+@TeleOp(name = "TechNoLogic TeleOp Improved", group = "teleop")
 //@Disabled
-public class TechNoLogicTeleOp extends OpMode{
+public class TechNoLogicTeleOpImproved extends OpMode{
 
     // Define class members
-    DcMotor leftFront;
     DcMotor leftRear;
-    DcMotor rightFront;
     DcMotor rightRear;
+    DcMotor topArm;
+    DcMotor bottomArm;
 
     Servo leftClaw;
     Servo rightClaw;
@@ -42,16 +40,16 @@ public class TechNoLogicTeleOp extends OpMode{
     @Override
     public void init() {
 
-        leftFront  = hardwareMap.get(DcMotor.class, "leftFront");
         leftRear   = hardwareMap.get(DcMotor.class, "leftRear");
-        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         rightRear  = hardwareMap.get(DcMotor.class, "rightRear");
+
+        topArm = hardwareMap.get(DcMotor.class, "topArm");
+        bottomArm = hardwareMap.get(DcMotor.class, "bottomArm");
 
         leftClaw  = hardwareMap.servo.get("leftClaw");
         rightClaw = hardwareMap.servo.get("rightClaw");
 
-        rightFront.setDirection(DcMotor.Direction.REVERSE);
-        rightRear.setDirection(DcMotor.Direction.REVERSE);
+        leftRear.setDirection(DcMotor.Direction.REVERSE);
 
         // Can use this line, but can also use opposites (set one to 0, the other to 1)
         //rightClaw.setDirection(Servo.Direction.REVERSE);
@@ -68,11 +66,15 @@ public class TechNoLogicTeleOp extends OpMode{
         double leftDrives  = -gamepad1.left_stick_y;
         double rightDrives = -gamepad1.right_stick_y;
 
+        double linearSlide = -gamepad2.left_stick_y;
+        double bottomRotation = -gamepad2.right_stick_y;
+
         // Set motor powers to joystick values
-        leftFront.setPower(leftDrives);
-        rightFront.setPower(rightDrives);
         leftRear.setPower(leftDrives);
         rightRear.setPower(rightDrives);
+
+        topArm.setPower(linearSlide);
+        bottomArm.setPower(bottomRotation);
 
         if (gamepad2.a){
             leftClaw.setPosition(LEFT_OPEN);

@@ -24,7 +24,7 @@ public class SensorTests extends OpMode {
 
     @Override
     public void loop() {
- 1
+
         // check whether touch sensor is pressed or not pressed,
         // then display telemetry feedback based on sensor value
         if (touch.isPressed())
