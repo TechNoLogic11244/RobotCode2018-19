@@ -68,7 +68,10 @@ public class TechNoLogicTeleOpImproved extends OpMode{
 
         double linearSlide = -gamepad2.left_stick_y;
         double bottomRotation = -gamepad2.right_stick_y;
-
+        
+        Range.clip(leftDrive, -0.75, 0.75);
+        Range.clip(rightDrive, -0.75, 0.75);
+        
         // Set motor powers to joystick values
         leftRear.setPower(leftDrives);
         rightRear.setPower(rightDrives);
