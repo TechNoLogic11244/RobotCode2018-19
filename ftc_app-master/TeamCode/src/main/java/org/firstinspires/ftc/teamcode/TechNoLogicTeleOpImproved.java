@@ -40,8 +40,8 @@ public class TechNoLogicTeleOpImproved extends OpMode{
     // arm variables (TBD, find accurate values through testing)
     final double EXTENSION_POWER = 0.5;
     final int MAX_EXTENSION      = 5000;
-    final int MIN_EXTENSION      = 100;
-    final int MIN_ROTATION       = 100;
+    final int MIN_EXTENSION      = 0;
+    final int MIN_ROTATION       = 0;
     final int MAX_ROTATION       = 5000;
 
     @Override
@@ -116,6 +116,8 @@ public class TechNoLogicTeleOpImproved extends OpMode{
 
         // Telemetry output for driver assistance
         telemetry.addData(">", "Press Stop to end program." );
+        telemetry.addData(">", "linear slide encoder value: " + extensionMotor.getCurrentPosition());
+        telemetry.addData(">", "rotation encoder value: " + rotationMotor.getCurrentPosition());
         telemetry.update();
     }
 }
