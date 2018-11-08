@@ -89,11 +89,15 @@ public class TechNoLogicTeleOpImproved extends OpMode{
         leftRear.setPower(leftDrives);
         rightRear.setPower(rightDrives);
 
+        /*
         if (rotationMotor.getCurrentPosition() <= MAX_ROTATION &&
                 rotationMotor.getCurrentPosition() >= MIN_ROTATION) {
             rotationMotor.setPower(bottomRotation);
         } else
             extensionMotor.setPower(0.0);
+*/
+
+        rotationMotor.setPower(bottomRotation);
 
         if (gamepad2.a){
             leftClaw.setPosition(LEFT_OPEN);
@@ -103,6 +107,7 @@ public class TechNoLogicTeleOpImproved extends OpMode{
             rightClaw.setPosition(RIGHT_CLOSE);
         }
 
+        /*
         if (extensionMotor.getCurrentPosition() <= MAX_EXTENSION &&
                 extensionMotor.getCurrentPosition() >= MIN_EXTENSION) {
             if (gamepad2.dpad_up)
@@ -112,6 +117,14 @@ public class TechNoLogicTeleOpImproved extends OpMode{
             else
                 extensionMotor.setPower(0.0);
         } else
+            extensionMotor.setPower(0.0);
+*/
+
+        if (gamepad2.dpad_up)
+            extensionMotor.setPower(EXTENSION_POWER);
+        else if (gamepad2.dpad_down)
+            extensionMotor.setPower(-EXTENSION_POWER);
+        else
             extensionMotor.setPower(0.0);
 
         // Telemetry output for driver assistance
