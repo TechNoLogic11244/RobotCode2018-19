@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 public class CraterAutonomous extends AutonomousBase {
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
 
         initialization();
 
@@ -12,7 +12,7 @@ public class CraterAutonomous extends AutonomousBase {
         unlatch();
 
         //drive forward to position one
-        encoderDrive(30, 0.7);
+        encoderDrive(30, 0.4);
 
         sample();
 
@@ -35,10 +35,6 @@ public class CraterAutonomous extends AutonomousBase {
 
         //drive to crater to park
         encoderDrive(-72, 0.7);
-
-
-
-
 
     }
 

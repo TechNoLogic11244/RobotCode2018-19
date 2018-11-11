@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -34,8 +35,10 @@ public class TechNoLogicTeleOpImproved extends OpMode{
     // servo constants (TBD, find accurate values through testing)
     final double LEFT_OPEN = 0.3;
     final double RIGHT_OPEN = 0.7;
-    final double LEFT_CLOSE = 0.5;
-    final double RIGHT_CLOSE = 0.5;
+    final double LEFT_CLOSE2 = 0.45;
+    final double RIGHT_CLOSE2 = 0.55;
+    final double LEFT_CLOSE = 0.55;
+    final double RIGHT_CLOSE = 0.4;
 
     // arm variables (TBD, find accurate values through testing)
     final double EXTENSION_POWER = 0.5;
@@ -56,15 +59,27 @@ public class TechNoLogicTeleOpImproved extends OpMode{
         leftClaw  = hardwareMap.servo.get("leftClaw");
         rightClaw = hardwareMap.servo.get("rightClaw");
 
-        leftRear.setDirection(DcMotor.Direction.REVERSE);
+        extensionMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        rightRear.setDirection(DcMotor.Direction.REVERSE);
+        leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
 
         extensionMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rotationMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         extensionMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rotationMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        rotationMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Can use this line, but can also use opposites (set one to 0, the other to 1)
         //rightClaw.setDirection(Servo.Direction.REVERSE);
+        rightClaw.setPosition(RIGHT_OPEN);
+        leftClaw.setPosition(LEFT_OPEN);
 
         // Wait for the start button
         telemetry.addData(">", "Press Start" );
@@ -105,6 +120,9 @@ public class TechNoLogicTeleOpImproved extends OpMode{
         } else if (gamepad2.b){
             leftClaw.setPosition(LEFT_CLOSE);
             rightClaw.setPosition(RIGHT_CLOSE);
+        } else if (gamepad2.x){
+            leftClaw.setPosition(LEFT_CLOSE2);
+            rightClaw.setPosition(RIGHT_CLOSE2);
         }
 
         /*
@@ -131,7 +149,8 @@ public class TechNoLogicTeleOpImproved extends OpMode{
         telemetry.addData(">", "Press Stop to end program." );
         telemetry.addData(">", "linear slide encoder value: " + extensionMotor.getCurrentPosition());
         telemetry.addData(">", "rotation encoder value: " + rotationMotor.getCurrentPosition());
-        telemetry.update();
+        telemetry.addData(">", "right motor position: " + rightRear.getCurrentPosition());
+        telemetry.addData(">", "left motor position: " + leftRear.getCurrentPosition());
     }
 }
 
