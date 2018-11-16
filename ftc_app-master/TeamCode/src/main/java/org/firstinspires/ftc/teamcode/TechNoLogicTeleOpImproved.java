@@ -41,7 +41,7 @@ public class TechNoLogicTeleOpImproved extends OpMode{
     final double RIGHT_CLOSE = 0.4;
 
     // arm variables (TBD, find accurate values through testing)
-    final double EXTENSION_POWER = 0.5;
+    final double EXTENSION_POWER = 0.75;
     final int MAX_EXTENSION      = 5000;
     final int MIN_EXTENSION      = 0;
     final int MIN_ROTATION       = 0;
@@ -95,14 +95,14 @@ public class TechNoLogicTeleOpImproved extends OpMode{
 
         double bottomRotation = -gamepad2.right_stick_y;
 
-        Range.clip(leftDrives, -0.75, 0.75);
-        Range.clip(rightDrives, -0.75, 0.75);
+        Range.clip(leftDrives, -0.65, 0.65);
+        Range.clip(rightDrives, -0.65, 0.65);
 
         Range.clip(bottomRotation, -0.4, 0.4);
         
         // Set motor powers to joystick values
-        leftRear.setPower(leftDrives);
-        rightRear.setPower(rightDrives);
+        leftRear.setPower(leftDrives * leftDrives * leftDrives);
+        rightRear.setPower(rightDrives * rightDrives * rightDrives);
 
         /*
         if (rotationMotor.getCurrentPosition() <= MAX_ROTATION &&

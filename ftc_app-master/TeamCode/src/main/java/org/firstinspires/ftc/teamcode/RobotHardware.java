@@ -44,9 +44,9 @@ public class RobotHardware {
             (WHEEL_DIAMETER_INCHES * 3.1415);
 
     //drive function constants
-    final double MINIMUM_DRIVE_PWR = 0.275;
+    final double MINIMUM_DRIVE_PWR = 0.3;
     final double DECELERATION_THRESHOLD = 7.0;
 
     //turning constants
-    final double MINIMUM_TURN_PWR = 0.275;
+    final double MINIMUM_TURN_PWR = 0.4;
 }

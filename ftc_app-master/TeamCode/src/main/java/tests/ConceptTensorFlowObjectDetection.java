@@ -52,7 +52,7 @@ import java.util.List;
  * is explained below.
  */
 @TeleOp(name = "Concept: TensorFlow Object Detection", group = "Concept")
-@Disabled
+//@Disabled
 public class ConceptTensorFlowObjectDetection extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
@@ -70,7 +70,7 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
      * Once you've obtained a license key, copy the string from the Vuforia web site
      * and paste it in to your code on the next line, between the double quotes.
      */
-    private static final String VUFORIA_KEY = " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
+    private static final String VUFORIA_KEY = "AcHjh/L/////AAABmcefxvFABE4egC7kE6SDokyA19FitpO9VTpAUQ/GPclYxIQgGBA0Sr5gYRvVcRDvCx1CsTjPNA9Sf8Kyg9DyYMsIOfDxHMB90T7EDD6hf2IOO/8H3Q838aFilXo1vbpfSjJCtmK+0YRZYiPzNMsELmk4iC8FAfJdI7xPjIVQBtZtnB5b8V2g19HDUHzs36JuiwuVUScojAEKJh/cLmD/XNo74C2HXWO0DiVU/i1fnJdSf4At0Vu0HeAEPer2hQcPZFkuRyHElmsSA+Uj9kXlNCCb+9Lv3g8RFLJzNANPwDoMrxkCppQhuY4LkDoQo+HHfvq7RcKW11eZaipdYeoK95dj2GUMWk6QMNjnm2vVVPma";
 
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia

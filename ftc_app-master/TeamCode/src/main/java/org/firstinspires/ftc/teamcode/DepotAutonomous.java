@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name = "Crater Autonomous", group = "autonomous")
-public class CraterAutonomous extends AutonomousBase {
+@Autonomous(name = "Depot  Autonomous", group = "autonomous")
+public class DepotAutonomous extends AutonomousBase {
 
     @Override
     public void runOpMode() {
@@ -28,7 +28,9 @@ public class CraterAutonomous extends AutonomousBase {
 
         telemetry.addData(">","gold Pos = " + goldPos);
 
-        sampleCrater(goldPos);
+        sampleDepot(goldPos);
+
+        encoderDriveWithTime(40, 1.0, 6);
 
     }
 
