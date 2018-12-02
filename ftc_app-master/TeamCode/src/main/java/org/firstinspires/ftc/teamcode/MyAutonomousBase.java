@@ -71,56 +71,56 @@ public class MyAutonomousBase extends LinearOpMode {
         runtime.reset();
     }
 
-        // power should always be POSITIVE
-        // distance should be in INCHES
-        // positive distance indicates driving forward
-        // negative distance indicates driving backwards
-        public void encoderDrive(double distance, double maxPwr) {
+    // power should always be POSITIVE
+    // distance should be in INCHES
+    // positive distance indicates driving forward
+    // negative distance indicates driving backwards
+    public void encoderDrive(double distance, double maxPwr) {
 
-            robot.leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            robot.rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-            double initPosR = robot.rightRear.getCurrentPosition();
-            double initPosL = robot.leftRear.getCurrentPosition();
+        double initPosR = robot.rightRear.getCurrentPosition();
+        double initPosL = robot.leftRear.getCurrentPosition();
 
-            double targetPos    = distance * robot.COUNTS_PER_INCH;
-            double distanceSign = Math.signum(distance);
+        double targetPos    = distance * robot.COUNTS_PER_INCH;
+        double distanceSign = Math.signum(distance);
 
-            double currentRobotPos = 0.;
+        double currentRobotPos = 0.;
 
-            double power = maxPwr;
+        double power = maxPwr;
 
-            // slopes for proportional speed increase/decrease
-            double decSlope = (maxPwr - robot.MINIMUM_DRIVE_PWR) / (robot.DECELERATION_THRESHOLD);
+        // slopes for proportional speed increase/decrease
+        double decSlope = (maxPwr - robot.MINIMUM_DRIVE_PWR) / (robot.DECELERATION_THRESHOLD);
 
-            while (Math.abs(currentRobotPos) < Math.abs(targetPos)){
+        while (Math.abs(currentRobotPos) < Math.abs(targetPos)){
 
-                double curPosR = robot.rightRear.getCurrentPosition() - initPosR;
-                double curPosL = robot.leftRear.getCurrentPosition() - initPosL;
+            double curPosR = robot.rightRear.getCurrentPosition() - initPosR;
+            double curPosL = robot.leftRear.getCurrentPosition() - initPosL;
 
-                currentRobotPos = (curPosR + curPosL) / 2;
+            currentRobotPos = (curPosR + curPosL) / 2;
 
-                // calculating points on trapezoidal profile graph
-                power = maxPwr - decSlope * (Math.abs(currentRobotPos) / robot.COUNTS_PER_INCH);
+            // calculating points on trapezoidal profile graph
+            power = maxPwr - decSlope * (Math.abs(currentRobotPos) / robot.COUNTS_PER_INCH);
 
-                if (power < robot.MINIMUM_DRIVE_PWR)
-                    power = robot.MINIMUM_DRIVE_PWR;
+            if (power < robot.MINIMUM_DRIVE_PWR)
+                power = robot.MINIMUM_DRIVE_PWR;
 
-                robot.rightRear.setPower(distanceSign * power);
-                robot.leftRear.setPower(distanceSign * power);
+            robot.rightRear.setPower(distanceSign * power);
+            robot.leftRear.setPower(distanceSign * power);
 
-                telemetry.addData(">", "target position = " + targetPos);
-                telemetry.addData(">", "current robot pos = " + currentRobotPos);
-                telemetry.addData(">", "right motor encoder pos = " + curPosR);
-                telemetry.addData(">", "left motor encoder pos = " + curPosL);
-                telemetry.update();
-
-            }
-
-            robot.rightRear.setPower(0.);
-            robot.leftRear.setPower(0.);
+            telemetry.addData(">", "target position = " + targetPos);
+            telemetry.addData(">", "current robot pos = " + currentRobotPos);
+            telemetry.addData(">", "right motor encoder pos = " + curPosR);
+            telemetry.addData(">", "left motor encoder pos = " + curPosL);
+            telemetry.update();
 
         }
+
+        robot.rightRear.setPower(0.);
+        robot.leftRear.setPower(0.);
+
+    }
 
     public void turnRight(double angle, double power){
 
@@ -222,7 +222,6 @@ public class MyAutonomousBase extends LinearOpMode {
             turnRight(13, 0.75);
             encoderDrive(40, 0.75);
             /*double targetTime = runtime.seconds() + 1.75;
-
             while (runtime.seconds() < targetTime) {
                 robot.rotationMotor.setPower(-0.5);
             }
@@ -241,7 +240,6 @@ public class MyAutonomousBase extends LinearOpMode {
             encoderDrive(40, 0.75);
             /*
             double targetTime = runtime.seconds() + 1.75;
-
             while (runtime.seconds() < targetTime) {
                 robot.rotationMotor.setPower(-0.5);
             }
@@ -262,7 +260,6 @@ public class MyAutonomousBase extends LinearOpMode {
             encoderDrive(55, 0.75);
             /*
             double targetTime = runtime.seconds() + 1.75;
-
             while (runtime.seconds() < targetTime) {
                 robot.rotationMotor.setPower(-0.5);
             }
@@ -282,14 +279,14 @@ public class MyAutonomousBase extends LinearOpMode {
 
         if (goldPos == "right"){
             turnRight(20, 0.75);
-            encoderDriveWithTime(36, 0.75,6);
+            encoderDriveWithTime(-36, 0.75,6);
         } else if (goldPos == "left"){
             turnLeft(20, 0.75);
-            encoderDriveWithTime(36, 0.75, 6);
+            encoderDriveWithTime(-36, 0.75, 6);
         } else {
-            encoderDriveWithTime(33, 0.75, 6);
+            encoderDriveWithTime(-33, 0.75, 6);
             turnLeft(20, 0.5);
-            encoderDriveWithTime(2, 0.5, 2);
+            encoderDriveWithTime(-2, 0.5, 2);
         }
 
     }
@@ -343,103 +340,81 @@ public class MyAutonomousBase extends LinearOpMode {
                                 goldPos = "center";
                             }
                         }
+                    } else if (updatedRecognitions.size() == 2) {
+                        int goldMineralX = -1;
+                        int silverMineral1X = -1;
+                        int silverMineral2X = -1;
+
+                        // This just records values, and is unchanged
+                        for (Recognition recognition : updatedRecognitions) {
+                            if (recognition.getLabel().equals(tfv.LABEL_GOLD_MINERAL)) {
+                                goldMineralX = (int) recognition.getLeft();
+                            } else if (silverMineral1X == -1) {
+                                silverMineral1X = (int) recognition.getLeft();
+                            } else {
+                                silverMineral2X = (int) recognition.getLeft();
+                            }
+                        }
+
+                        //Our robot unlatches by driving slightly to the left (with mecanum wheels) so it can
+                        //see the left two minerals only, but the phone camera could be mounted further to
+                        //the left side instead. If mounting to right, need change 'right' to 'left'
+                        // If there is no gold (-1) and there two silvers (not -1) the gold
+                        // is not visible, and must be on the right
+                        if (goldMineralX == -1 && silverMineral1X != -1 && silverMineral2X != -1) {
+                            goldPos = "right";
+                        }
+                        // If you can see one gold and one silver ...
+                        else if (goldMineralX != -1 && silverMineral1X != -1) {
+                            // ... if the gold is to the right of the silver, the gold is in the center ...
+                            if (goldMineralX > silverMineral1X) {
+                                goldPos = "center";
+                            }
+                            // ... otherwise it is on the left
+                            else {
+                                goldPos = "left";
+                            }
+                        }
+                    }
+                    //The only 1 detected could be moved to other function to make sure more accurate result
+                    else if (updatedRecognitions.size() == 1) {
+                        int goldMineralX = -1;
+                        int silverMineral1X = -1;
+                        int silverMineral2X = -1;
+
+                        // This just records values, and is unchanged
+                        for (Recognition recognition : updatedRecognitions) {
+                            if (recognition.getLabel().equals(tfv.LABEL_GOLD_MINERAL)) {
+                                goldMineralX = (int) recognition.getLeft();
+                            } else if (silverMineral1X == -1) {
+                                silverMineral1X = (int) recognition.getLeft();
+                            } else {
+                                silverMineral2X = (int) recognition.getLeft();
+                            }
+                        }
+
+                        // If there is a gold (not -1)
+                        if (goldMineralX != -1) {
+                            goldPos = "center";
+                        }
+                        // If you can see one silver, just guess to get 50%
+                        else {
+                            goldPos = "left";
+                        }
+                    }
+
+                    if (goldPos != "unknown") {
+                        break;
                     }
                 }
-				else if (updatedRecognitions.size() == 2)
-				{
-					int goldMineralX = -1;
-    				int silverMineral1X = -1;
-    				int silverMineral2X = -1;
-
-    				// This just records values, and is unchanged
-				    for (Recognition recognition : updatedRecognitions) 
-				    {
-				        if (recognition.getLabel().equals(LABEL_GOLD_MINERAL)) 
-				        {
-				            goldMineralX = (int) recognition.getLeft();
-				        } 
-				        else if (silverMineral1X == -1) 
-				        {
-				            silverMineral1X = (int) recognition.getLeft();
-				        }    
-				        else 
-				        {
-				            silverMineral2X = (int) recognition.getLeft();
-				        }
-				    }
-
-					//Our robot unlatches by driving slightly to the left (with mecanum wheels) so it can 
-					//see the left two minerals only, but the phone camera could be mounted further to 
-					//the left side instead. If mounting to right, need change 'right' to 'left'
-				    // If there is no gold (-1) and there two silvers (not -1) the gold
-				    // is not visible, and must be on the right
-				    if (goldMineralX == -1 && silverMineral1X != -1 && silverMineral2X != -1)
-				    {
-				        goldPos = "right";
-				    }
-				    // If you can see one gold and one silver ...
-				    else if (goldMineralX != -1 && silverMineral1X != -1)
-				    {
-				        // ... if the gold is to the right of the silver, the gold is in the center ...
-				        if (goldMineralX > silverMineral1X) 
-				        {
-				            goldPos = "center";
-				        } 
-				        // ... otherwise it is on the left
-				        else 
-				        {
-				            goldPos = "left";
-				        }
-				    }
-				}
-				//The only 1 detected could be moved to other function to make sure more accurate result
-				else if (updatedRecognitions.size() == 1)
-				{
-					int goldMineralX = -1;
-    				int silverMineral1X = -1;
-    				int silverMineral2X = -1;
-
-    				// This just records values, and is unchanged
-				    for (Recognition recognition : updatedRecognitions) 
-				    {
-				        if (recognition.getLabel().equals(LABEL_GOLD_MINERAL)) 
-				        {
-				            goldMineralX = (int) recognition.getLeft();
-				        } 
-				        else if (silverMineral1X == -1) 
-				        {
-				            silverMineral1X = (int) recognition.getLeft();
-				        }    
-				        else 
-				        {
-				            silverMineral2X = (int) recognition.getLeft();
-				        }
-				    }
-
-				    // If there is a gold (not -1) 
-				    if (goldMineralX != -1 )
-				    {
-				        goldPos = "center";
-				    }
-				    // If you can see one silver, just guess to get 50%
-				    else 
-					{
-						goldPos = "left";
-				    }
-				}
-				
-				if (goldPos != "unknown")
-				{
-					break;
-				}
             }
         }
 
-		telemetry.addData(">", "gold mineral position = " + goldPos);
+        telemetry.addData(">", "gold mineral position = " + goldPos);
         telemetry.update();
-		
+
         if (tfv.tfod != null) {
-        tfv.tfod.shutdown();
+            tfv.tfod.shutdown();
         }
 
         return goldPos;
