@@ -121,6 +121,53 @@ public class MyAutonomousBase extends LinearOpMode {
         robot.leftRear.setPower(0.);
 
     }
+	
+	// power should always be POSITIVE
+    // distance should be in INCHES
+    // positive distance indicates driving forward
+    // negative distance indicates driving backwards
+/*
+    public void encoderArmExtenstion(double distance, double maxPwr) {
+
+        robot.extensionMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        
+        double initPos = robot.extensionMotor.getCurrentPosition();
+        
+        double targetPos    = distance * robot.COUNTS_PER_INCH;
+        double distanceSign = Math.signum(distance);
+
+        double currentArmPos = 0.;
+
+        double power = maxPwr;
+
+        // slopes for proportional speed increase/decrease
+        double decSlope = (maxPwr - robot.MINIMUM_DRIVE_PWR) / (robot.DECELERATION_THRESHOLD);
+
+        while (Math.abs(currentRobotPos) < Math.abs(targetPos)){
+
+            double curPos = robot.extensionMotor.getCurrentPosition() - initPos;
+            
+            currentArmPos = curPos;
+
+            // calculating points on trapezoidal profile graph
+            power = maxPwr - decSlope * (Math.abs(currentArmPos) / robot.COUNTS_PER_INCH);
+
+            if (power < robot.MINIMUM_DRIVE_PWR)
+                power = robot.MINIMUM_DRIVE_PWR;
+
+            robot.extensionMotor.setPower(distanceSign * power);
+            
+            telemetry.addData(">", "target Arm position = " + targetPos);
+            telemetry.addData(">", "current Arm pos = " + currentRobotPos);
+            telemetry.addData(">", "Arm motor encoder pos = " + curPos);
+            telemetry.update();
+
+        }
+
+        robot.extensionMotor.setPower(0.);
+        
+    }
+*/
 
     public void turnRight(double angle, double power){
 
@@ -376,7 +423,7 @@ public class MyAutonomousBase extends LinearOpMode {
                             }
                         }
                     }
-                    /*
+/*
                     //The only 1 detected could be moved to other function to make sure more accurate result
                     else if (updatedRecognitions.size() == 1) {
                         int goldMineralX = -1;
@@ -403,8 +450,7 @@ public class MyAutonomousBase extends LinearOpMode {
                             goldPos = "left";
                         }
                     }
-                    */
-
+*/
                     if (goldPos != "unknown") {
                         break;
                     }
@@ -422,6 +468,61 @@ public class MyAutonomousBase extends LinearOpMode {
         return goldPos;
     }
 
+/*
+    public String detectOneMineralOnly(){
+
+        String goldPos = "unknown";
+
+        // activate tensor flow
+        if (tfv.tfod != null) {
+            tfv.tfod.activate();
+        }
+
+        double initTime = runtime.seconds();
+        double targetTime = initTime + 2.;
+
+        while (runtime.seconds() < targetTime){
+
+            if (tfv.tfod != null) {
+
+                // getUpdatedRecognitions() will return null if no new information is available since
+                // the last time that call was made.
+                List<Recognition> updatedRecognitions = tfv.tfod.getUpdatedRecognitions();
+
+                if (updatedRecognitions != null) {
+                    //telemetry.addData("# Object Detected", updatedRecognitions.size());
+                    if (updatedRecognitions.size() == 1) {
+                        int goldMineralX = -1;
+                        int silverMineral1X = -1;
+                        int silverMineral2X = -1;
+
+                        // This just records values, and is unchanged
+                        for (Recognition recognition : updatedRecognitions) {
+                            if (recognition.getLabel().equals(tfv.LABEL_GOLD_MINERAL)) {
+                            	goldPos = "Found";
+                            } 
+                        }
+                    }
+                    
+                    if (goldPos != "unknown") {
+                        break;
+                    }
+                }
+            }
+        }
+
+        telemetry.addData(">", "gold mineral position = " + goldPos);
+        telemetry.update();
+
+        if (tfv.tfod != null) {
+            tfv.tfod.shutdown();
+        }
+
+        return goldPos;
+    }
+*/
+    
+    
     public void placeMarker(){
         telemetry.addData(">", "Placing Team Marker...");
         telemetry.update();
