@@ -376,6 +376,7 @@ public class MyAutonomousBase extends LinearOpMode {
                             }
                         }
                     }
+                    /*
                     //The only 1 detected could be moved to other function to make sure more accurate result
                     else if (updatedRecognitions.size() == 1) {
                         int goldMineralX = -1;
@@ -402,6 +403,7 @@ public class MyAutonomousBase extends LinearOpMode {
                             goldPos = "left";
                         }
                     }
+                    */
 
                     if (goldPos != "unknown") {
                         break;
