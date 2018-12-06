@@ -320,7 +320,164 @@ public class MyAutonomousBase extends LinearOpMode {
             turnRight(7, 0.5);
         }
     }
+    
+    
+    public void mySampleDepot(String goldPos) {
+        
+        if (goldPos == "right") {
+        	//1. turn right and forward to knock
+            //turnRight(13, 0.75);
+            //encoderDrive(40, 0.75);
+            //sleep(250);
+            
+        	//2. backward
+        	//turnLeft(18, 0.75);
+            //sleep(250);
+            
+        	//3. turn left
+        	//encoderDrive(24, 0.75);
+            //sleep(250);
+            
+        	//4. forward
+        	
+        	//5. turn right facing depot
+        	
+        	//6. move forward to depot
+        	
+        	//7. claim
+            placeMarker();
+            
+            //8. backward  
+            //encoderDrive(-35, 0.75);
+            //turnRight(95, 0.75);
+            
+            //9. parking (extent and rotate arm)
+            
+        } else if (goldPos == "left") {
+        	//1. turn left and move forward to knock
+            //turnLeft(13, 0.75);
+            //encoderDrive(40, 0.75);
+            //sleep(250);
+        	
+            //2. (backward to give space)
+        	
+        	//3. turn right
+        	//turnRight(14, 0.5);
+            //sleep(250);
+            
+        	//4. move forward
+        	//encoderDrive(24, 0.75);
+            //sleep(250);
+            
+        	//5. claming
+        	placeMarker();
+        	
+        	//6. move backward
+            //encoderDrive(-38, 0.75);
+            //sleep(250);
+            //turnRight(56, 0.75);
+            //encoderDrive(35, 0.75);
+            //turnRight(5, 0.5);
+        	
+        	//7. parking (extent and rotate arm)
+        	
+        } else {
+        	//1. forward
+            //encoderDrive(55, 0.75);
+            //sleep(250);
+            
+        	//2. Claming
+            placeMarker();
+            
+            //3. backward
+            //encoderDrive(-30, 0.75);
+            
+            //4. turn left (~90 degree)
+            //turnRight(60, 0.75);
+            //encoderDrive(33, 0.75);
+            //turnRight(7, 0.5);
+            
+            //5. move forward
+            
+            //6. turn left
+            
+            //7. move forward
+            
+            //8. parking (extent and rotate arm)
+            
+        }
+    }
 
+    //adjust later to add team marker logic
+    public void mySampleCrater(String goldPos){
+    	//From step 5 could be same if can reach the same point
+        if (goldPos == "right"){
+        	//1. turn right and move forward to knock
+            //turnLeft(20, 0.75);
+            //encoderDriveWithTime(-36, 0.75, 6);
+        	
+        	//2. backward
+        	
+        	//3. turn left
+        	
+        	//4. forward
+        	
+        	//5. turn left
+        	
+        	//6. forward
+        	
+        	//7. claiming
+        	
+        	//8. backward
+        	
+        	//9. parking (extent and rotate arm)
+        	
+        } else if (goldPos == "left"){
+        	//1. turn left and move forward to knock
+            //turnLeft(20, 0.75);
+            //encoderDriveWithTime(-36, 0.75, 6);
+        	
+        	//2. backward
+        	
+        	//3. turn left
+        	
+        	//4. forward
+        	
+        	//5. turn left
+        	
+        	//6. forward
+        	
+        	//7. claiming
+        	
+        	//8. backward
+        	
+        	//9. parking (extent and rotate arm)
+        	
+        } else {
+        	//1. move forward and knock
+            //encoderDriveWithTime(-33, 0.75, 6);
+            //turnLeft(20, 0.5);
+            
+        	//2. backward 
+        	//encoderDriveWithTime(-2, 0.5, 2);
+        	
+        	//3. turn left
+        	
+        	//4. forward
+        	
+        	//5. turn left
+        	
+        	//6. forward
+        	
+        	//7. claiming
+        	
+        	//8. backward
+        	
+        	//9. parking (extent and rotate arm)
+        }
+
+    }
+    
     //adjust later to add team marker logic
     public void sampleCrater(String goldPos){
 
