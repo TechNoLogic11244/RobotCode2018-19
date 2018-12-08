@@ -15,6 +15,7 @@ public class RobotHardware {
     //Servos
     Servo leftClaw;
     Servo rightClaw;
+    Servo markerServo;
 
     BNO055IMU imu;
 
@@ -25,6 +26,8 @@ public class RobotHardware {
     final double RIGHT_OPEN = 0.7;
     final double LEFT_CLOSE = 0.5;
     final double RIGHT_CLOSE = 0.5;
+    final double MARKER_START = 0.8;
+    final double MARKER_PLACE = 0.3;
 
     // arm variables (TBD, find accurate values through testing)
     final double EXTENSION_POWER = 0.5;
@@ -32,6 +35,7 @@ public class RobotHardware {
     final int MIN_EXTENSION      = 0;
     final int MIN_ROTATION       = 0;
     final int MAX_ROTATION       = 5000;
+    final double UNLATCH_ROTATION = 5834;
 
 
     /* Autonomous Constants */
@@ -44,9 +48,9 @@ public class RobotHardware {
             (WHEEL_DIAMETER_INCHES * 3.1415);
 
     //drive function constants
-    final double MINIMUM_DRIVE_PWR = 0.3;
+    final double MINIMUM_DRIVE_PWR = 0.2;
     final double DECELERATION_THRESHOLD = 7.0;
 
     //turning constants
-    final double MINIMUM_TURN_PWR = 0.4;
+    final double MINIMUM_TURN_PWR = 0.2;
 }
