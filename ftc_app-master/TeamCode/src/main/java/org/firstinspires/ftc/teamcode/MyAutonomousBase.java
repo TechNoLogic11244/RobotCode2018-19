@@ -133,44 +133,33 @@ public class MyAutonomousBase extends LinearOpMode {
     // negative distance indicates driving backwards
 /*
     public void encoderArmExtenstion(double distance, double maxPwr) {
-
         robot.extensionMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        
+
         double initPos = robot.extensionMotor.getCurrentPosition();
-        
+
         double targetPos    = distance * robot.COUNTS_PER_INCH;
         double distanceSign = Math.signum(distance);
-
         double currentArmPos = 0.;
-
         double power = maxPwr;
-
         // slopes for proportional speed increase/decrease
         double decSlope = (maxPwr - robot.MINIMUM_DRIVE_PWR) / (robot.DECELERATION_THRESHOLD);
-
         while (Math.abs(currentRobotPos) < Math.abs(targetPos)){
-
             double curPos = robot.extensionMotor.getCurrentPosition() - initPos;
-            
-            currentArmPos = curPos;
 
+            currentArmPos = curPos;
             // calculating points on trapezoidal profile graph
             power = maxPwr - decSlope * (Math.abs(currentArmPos) / robot.COUNTS_PER_INCH);
-
             if (power < robot.MINIMUM_DRIVE_PWR)
                 power = robot.MINIMUM_DRIVE_PWR;
-
             robot.extensionMotor.setPower(distanceSign * power);
-            
+
             telemetry.addData(">", "target Arm position = " + targetPos);
             telemetry.addData(">", "current Arm pos = " + currentRobotPos);
             telemetry.addData(">", "Arm motor encoder pos = " + curPos);
             telemetry.update();
-
         }
-
         robot.extensionMotor.setPower(0.);
-        
+
     }
 */
 
@@ -270,7 +259,6 @@ public class MyAutonomousBase extends LinearOpMode {
 
 
     /*public void sampleDepot(String goldPos) {
-
         if (goldPos == "right") {
             turnRight(13, 0.75);
             encoderDrive(40, 0.75);
@@ -326,25 +314,25 @@ public class MyAutonomousBase extends LinearOpMode {
             turnRight(7, 0.5);
         }
     }*/
-    
-    
+
+
     public void depotSample(String goldPos) {
-        
+
         if (goldPos == "right") {
-        	//1. turn right and forward to knock
+            //1. turn right and forward to knock
             turnRight(25.0, 0.5);
             encoderDriveAdj(-35.0 + 2.0, 0.5, -25.0, 6.0);
             sleep(250);
-            
-        	//2. backward
+
+            //2. backward
             encoderDriveAdj(18.0 - 2.0, 0.5, -25.0, 4.0);
-        	//turnLeft(18, 0.75);
+            //turnLeft(18, 0.75);
             //sleep(250);
-            
-        	//3. turn left
+
+            //3. turn left
             turnLeft(108.0, 0.5);
             sleep(250);
-        	//encoderDrive(24, 0.75);
+            //encoderDrive(24, 0.75);
             //sleep(250);
 
             //4. forward
@@ -367,10 +355,10 @@ public class MyAutonomousBase extends LinearOpMode {
             //turnRight(95, 0.75);
 
             //9. parking (extent and rotate arm)
-            rotateArm(4000, 0.8);
-            
+            parking();
+
         } else if (goldPos == "left") {
-        	//1. turn left and move forward to knock
+            //1. turn left and move forward to knock
             turnLeft(27.0, 0.5);
             encoderDriveAdj(-35.0 + 2.0 - 6, 0.55, 27.0, 6.0);
             sleep(250);
@@ -409,40 +397,40 @@ public class MyAutonomousBase extends LinearOpMode {
             rotateArm(4000, 0.8);
         	
         } else {
-        	//1. forward
+            //1. forward
             encoderDriveAdj(-52, 0.45, 0, 8);
             sleep(250);
-            
-        	//2. Claming
+
+            //2. Claming
             placeMarker();
-            
+
             //3. backward
             encoderDriveAdj(43.5, 0.45, 0, 8);
             sleep(500);
-            
+
             //4. turn left (~90 degree)
             turnLeft(84, 0.5);
             //encoderDrive(33, 0.75);
             //turnRight(7, 0.5);
-            
+
             //5. move forward
             encoderDriveAdj(-45.0, 0.6, 84, 8);
-            
+
             //6. turn right
             turnRight(125.0, 0.6);
-            
+
             //7. move forward
             encoderDriveAdj(10, 0.4, -40, 2.5);
 
             //8. parking (extent and rotate arm)
-            rotateArm(4000, 0.8);
-            
+            parking();
+
         }
     }
 
     //adjust later to add team marker logic
     public void craterSample(String goldPos){
-    	//From step 5 could be same if can reach the same point
+        //From step 5 could be same if can reach the same point
         if (goldPos == "right") {
             //1. turn right and forward to knock
             turnRight(25.0, 0.5);
@@ -480,7 +468,7 @@ public class MyAutonomousBase extends LinearOpMode {
             //turnRight(95, 0.75);
 
             //9. parking (extent and rotate arm)
-            rotateArm(4000, 0.8);
+            parking();
 
         } else if (goldPos == "left") {
             //1. turn left and move forward to knock
@@ -519,7 +507,7 @@ public class MyAutonomousBase extends LinearOpMode {
             //turnRight(95, 0.75);
 
             //9. parking (extent and rotate arm)
-            rotateArm(4000, 0.8);
+            parking();
 
         } else {
             //1. forward
@@ -549,15 +537,14 @@ public class MyAutonomousBase extends LinearOpMode {
             encoderDriveAdj(88, 0.75, 138.25, 4);
 
             //8. parking (extent and rotate arm)
-            rotateArm(4300, 0.8);
+            parking();
 
         }
 
     }
-    
+
     //adjust later to add team marker logic
     /*public void sampleCrater(String goldPos){
-
         if (goldPos == "right"){
             turnRight(20, 0.75);
             encoderDriveAdj(-36, 0.75,6);
@@ -569,7 +556,6 @@ public class MyAutonomousBase extends LinearOpMode {
             turnLeft(20, 0.5);
             encoderDriveAdj(-2, 0.5, 2);
         }
-
     }*/
 
     public String detectMinerals(){
@@ -663,7 +649,6 @@ public class MyAutonomousBase extends LinearOpMode {
                         int goldMineralX = -1;
                         int silverMineral1X = -1;
                         int silverMineral2X = -1;
-
                         // This just records values, and is unchanged
                         for (Recognition recognition : updatedRecognitions) {
                             if (recognition.getLabel().equals(tfv.LABEL_GOLD_MINERAL)) {
@@ -674,7 +659,6 @@ public class MyAutonomousBase extends LinearOpMode {
                                 silverMineral2X = (int) recognition.getLeft();
                             }
                         }
-
                         // If there is a gold (not -1)
                         if (goldMineralX != -1) {
                             goldPos = "center";
@@ -704,59 +688,48 @@ public class MyAutonomousBase extends LinearOpMode {
 
 /*
     public String detectOneMineralOnly(){
-
         String goldPos = "unknown";
-
         // activate tensor flow
         if (tfv.tfod != null) {
             tfv.tfod.activate();
         }
-
         double initTime = runtime.seconds();
         double targetTime = initTime + 2.;
-
         while (runtime.seconds() < targetTime){
-
             if (tfv.tfod != null) {
-
                 // getUpdatedRecognitions() will return null if no new information is available since
                 // the last time that call was made.
                 List<Recognition> updatedRecognitions = tfv.tfod.getUpdatedRecognitions();
-
                 if (updatedRecognitions != null) {
                     //telemetry.addData("# Object Detected", updatedRecognitions.size());
                     if (updatedRecognitions.size() == 1) {
                         int goldMineralX = -1;
                         int silverMineral1X = -1;
                         int silverMineral2X = -1;
-
                         // This just records values, and is unchanged
                         for (Recognition recognition : updatedRecognitions) {
                             if (recognition.getLabel().equals(tfv.LABEL_GOLD_MINERAL)) {
                             	goldPos = "Found";
-                            } 
+                            }
                         }
                     }
-                    
+
                     if (goldPos != "unknown") {
                         break;
                     }
                 }
             }
         }
-
         telemetry.addData(">", "gold mineral position = " + goldPos);
         telemetry.update();
-
         if (tfv.tfod != null) {
             tfv.tfod.shutdown();
         }
-
         return goldPos;
     }
 */
-    
-    
+
+
     public void placeMarker(){
         telemetry.addData(">", "Placing Team Marker...");
         telemetry.update();
@@ -916,5 +889,15 @@ public class MyAutonomousBase extends LinearOpMode {
         extendArm(-7689, 0.8);
 
     }
+
+    public void parking() {
+        //close the claw servo
+        robot.leftClaw.setPosition(0.55);
+        robot.rightClaw.setPosition(0.4);
+
+        //Originally it is 4300, which is not close to the ground enough
+        rotateArm(4300 + 500, 0.8);
+    }
+
 
 }
