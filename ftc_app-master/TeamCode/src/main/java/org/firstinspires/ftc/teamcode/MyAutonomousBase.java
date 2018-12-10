@@ -126,8 +126,8 @@ public class MyAutonomousBase extends LinearOpMode {
         robot.leftRear.setPower(0.);
 
     }
-	
-	// power should always be POSITIVE
+
+    // power should always be POSITIVE
     // distance should be in INCHES
     // positive distance indicates driving forward
     // negative distance indicates driving backwards
@@ -394,8 +394,8 @@ public class MyAutonomousBase extends LinearOpMode {
             //turnRight(95, 0.75);
 
             //9. parking (extent and rotate arm)
-            rotateArm(4000, 0.8);
-        	
+            parking();
+
         } else {
             //1. forward
             encoderDriveAdj(-52, 0.45, 0, 8);
