@@ -21,7 +21,7 @@ public class MyAutonomousBase extends LinearOpMode {
 
     Orientation angles;
 
-    final double GYRO_CORRECTION_FACTOR = 0.01;
+    final double GYRO_CORRECTION_FACTOR = 0.015;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -332,109 +332,110 @@ public class MyAutonomousBase extends LinearOpMode {
         
         if (goldPos == "right") {
         	//1. turn right and forward to knock
-            turnRight(29.0, 0.75);
-            encoderDriveAdj(-35.0 + 2.0, 0.75, -29.0, 6.0);
+            turnRight(25.0, 0.5);
+            encoderDriveAdj(-35.0 + 2.0, 0.5, -25.0, 6.0);
             sleep(250);
             
         	//2. backward
-            encoderDriveAdj(18.0 - 2.0, 0.75, -29.0, 4.0);
+            encoderDriveAdj(18.0 - 2.0, 0.5, -25.0, 4.0);
         	//turnLeft(18, 0.75);
             //sleep(250);
             
         	//3. turn left
-            turnLeft(113.0, 0.75);
+            turnLeft(108.0, 0.5);
             sleep(250);
         	//encoderDrive(24, 0.75);
             //sleep(250);
-            
-        	//4. forward
-            encoderDriveAdj(-45, 0.8, 84, 7.0);
-            sleep(250);
-        	
-        	//5. turn left facing depot
-            turnLeft(130.0, 0.75);
-            sleep(250);
-        	
-        	//6. move forward to depot
-            encoderDriveAdj(-57.0, 0.8, -45, 8.0);
-            sleep(250);
-        	
-        	//7. claim
-            placeMarker();
-            
-            //8. backward  
-            encoderDriveAdj(88, 0.75, -45, 8);
-            //turnRight(95, 0.75);
-            
-            //9. parking (extent and rotate arm)
-            //rotateArm(2000, 0.4);
-            
-        } else if (goldPos == "left") {
-        	//1. turn left and move forward to knock
-            turnLeft(29.0, 0.75);
-            encoderDriveAdj(-35.0 + 2.0, 0.75, 29.0, 6.0);
-            sleep(250);
-
-            //2. backward
-            encoderDriveAdj(18.0 - 2.0, 0.75, -29.0, 4.0);
-            //turnLeft(18, 0.75);
-            //sleep(250);
-
-            //3. turn left
-            turnLeft(55.0, 0.75);
-            sleep(250);
-            //encoderDrive(24, 0.75);
-            //sleep(250);
 
             //4. forward
-            encoderDriveAdj(-45, 0.8, 84, 7.0);
+            encoderDriveAdj(-53.5, 0.6, 90, 7.0);
             sleep(250);
 
             //5. turn left facing depot
-            turnLeft(130.0, 0.75);
+            turnRight(110, 0.6);
             sleep(250);
 
             //6. move forward to depot
-            encoderDriveAdj(-57.0, 0.8, -45, 8.0);
+            encoderDriveAdj(-57.0, 0.6, -43, 8.0);
             sleep(250);
 
             //7. claim
             placeMarker();
 
             //8. backward
-            encoderDriveAdj(88, 0.75, -45, 8);
+            encoderDriveAdj(66.5, 0.7, -45, 4);
             //turnRight(95, 0.75);
 
             //9. parking (extent and rotate arm)
-            //rotateArm(2000, 0.4);
+            rotateArm(4000, 0.8);
+            
+        } else if (goldPos == "left") {
+        	//1. turn left and move forward to knock
+            turnLeft(27.0, 0.5);
+            encoderDriveAdj(-35.0 + 2.0 - 6, 0.55, 27.0, 6.0);
+            sleep(250);
+
+            //2. backward
+            encoderDriveAdj(18.0 - 2.0 + 6, 0.5, 27.0, 4.0);
+            //turnLeft(18, 0.75);
+            sleep(250);
+
+            //3. turn left
+            turnLeft(57.0, 0.5);
+            sleep(250);
+            //encoderDrive(24, 0.75);
+            //sleep(250);
+
+            //4. forward
+            encoderDriveAdj(-37.5, 0.6, 84, 7.0);
+            sleep(250);
+
+            //5. turn left facing depot
+            turnRight(120.0, 0.6);
+            sleep(250);
+
+            //6. move forward to depot
+            encoderDriveAdj(-57.0, 0.6, -45, 8.0);
+            sleep(250);
+
+            //7. claim
+            placeMarker();
+
+            //8. backward
+            encoderDriveAdj(66.5, 0.7, -45, 4);
+            //turnRight(95, 0.75);
+
+            //9. parking (extent and rotate arm)
+            rotateArm(4000, 0.8);
         	
         } else {
         	//1. forward
-            encoderDriveAdj(-58 + 2, 0.75, 0, 8);
+            encoderDriveAdj(-52, 0.45, 0, 8);
             sleep(250);
             
         	//2. Claming
             placeMarker();
             
             //3. backward
-            encoderDriveAdj(56 - 2, 0.75, 0, 8);
+            encoderDriveAdj(43.5, 0.45, 0, 8);
+            sleep(500);
             
             //4. turn left (~90 degree)
-            turnLeft(84, 0.75);
+            turnLeft(84, 0.5);
             //encoderDrive(33, 0.75);
             //turnRight(7, 0.5);
             
             //5. move forward
-            encoderDriveAdj(-84.0, 0.75, 84, 8);
+            encoderDriveAdj(-45.0, 0.6, 84, 8);
             
-            //6. turn left
-            turnLeft(130.0, 0.75);
+            //6. turn right
+            turnRight(125.0, 0.6);
             
             //7. move forward
-            encoderDriveAdj(-57, 0.75, -45, 8);
+            encoderDriveAdj(10, 0.4, -40, 2.5);
 
             //8. parking (extent and rotate arm)
-            //rotateArm(2000, 0.8);
+            rotateArm(4000, 0.8);
             
         }
     }
@@ -444,89 +445,90 @@ public class MyAutonomousBase extends LinearOpMode {
     	//From step 5 could be same if can reach the same point
         if (goldPos == "right") {
             //1. turn right and forward to knock
-            turnRight(29.0, 0.75);
-            encoderDriveAdj(-35.0 + 2.0, 0.75, -29.0, 6.0);
+            turnRight(25.0, 0.5);
+            encoderDriveAdj(-35.0 + 2.0 + 4.0, 0.5, -25.0, 6.0);
             sleep(250);
 
             //2. backward
-            encoderDriveAdj(18.0 - 2.0, 0.75, -29.0, 4.0);
+            encoderDriveAdj(18.0 - 2.0 - 2.0, 0.5, -25.0, 4.0);
             //turnLeft(18, 0.75);
             //sleep(250);
 
             //3. turn left
-            turnLeft(113.0, 0.75);
+            turnLeft(108.0, 0.5);
             sleep(250);
             //encoderDrive(24, 0.75);
             //sleep(250);
 
             //4. forward
-            encoderDriveAdj(-45, 0.8, 84, 7.0);
+            encoderDriveAdj(-54.5, 0.6, 90, 7.0);
             sleep(250);
 
             //5. turn left facing depot
-            turnLeft(50.0, 0.75);
+            turnLeft(30.0, 0.6);
             sleep(250);
 
             //6. move forward to depot
-            encoderDriveAdj(-57.0, 0.8, 135, 8.0);
+            encoderDriveAdj(-49.5, 0.6, 138.25, 8.0);
             sleep(250);
 
             //7. claim
             placeMarker();
 
             //8. backward
-            encoderDriveAdj(88, 0.75, 135, 8);
+            encoderDriveAdj(66.5, 0.7, 138.25, 4);
             //turnRight(95, 0.75);
 
             //9. parking (extent and rotate arm)
-            //rotateArm(2000, 0.4);
+            rotateArm(4000, 0.8);
 
         } else if (goldPos == "left") {
             //1. turn left and move forward to knock
-            turnLeft(29.0, 0.75);
-            encoderDriveAdj(-35.0 + 2.0, 0.75, 29.0, 6.0);
+            turnLeft(27.0, 0.5);
+            encoderDriveAdj(-35.0 + 2.0 + 4.0 , 0.55, 27.0, 6.0);
             sleep(250);
 
             //2. backward
-            encoderDriveAdj(18.0 - 2.0, 0.75, -29.0, 4.0);
+            encoderDriveAdj(18.0 - 2.0  - 2.0, 0.5, 27.0, 4.0);
             //turnLeft(18, 0.75);
-            //sleep(250);
+            sleep(250);
 
             //3. turn left
-            turnLeft(55.0, 0.75);
+            turnLeft(57.0, 0.5);
             sleep(250);
             //encoderDrive(24, 0.75);
             //sleep(250);
 
             //4. forward
-            encoderDriveAdj(-45, 0.8, 84, 7.0);
+            encoderDriveAdj(-34.5, 0.6, 84, 7.0);
             sleep(250);
 
             //5. turn left facing depot
-            turnLeft(50.0, 0.75);
+            turnLeft(30.0, 0.6);
             sleep(250);
 
             //6. move forward to depot
-            encoderDriveAdj(-57.0, 0.8, 135, 8.0);
+            encoderDriveAdj(-57.0, 0.6, 137, 8.0);
             sleep(250);
 
             //7. claim
             placeMarker();
 
             //8. backward
-            encoderDriveAdj(88, 0.75, 15, 8);
+            encoderDriveAdj(66.5, 0.7, 138.25, 4);
             //turnRight(95, 0.75);
 
             //9. parking (extent and rotate arm)
-            //rotateArm(2000, 0.4);
+            rotateArm(4000, 0.8);
 
         } else {
             //1. forward
-            encoderDriveAdj(-16 + 2, 0.75, 0, 8);
+            encoderDriveAdj(-21, 0.5, 0, 8);
             sleep(250);
 
             //3. backward
-            encoderDriveAdj(14 - 2, 0.75, 0, 8);
+            encoderDriveAdj(10, 0.5, 0, 8);
+            sleep(250);
 
             //4. turn left (~90 degree)
             turnLeft(84, 0.75);
@@ -534,20 +536,20 @@ public class MyAutonomousBase extends LinearOpMode {
             //turnRight(7, 0.5);
 
             //5. move forward
-            encoderDriveAdj(-84.0, 0.75, 84, 8);
+            encoderDriveAdj(-41.75, 0.75, 84, 8);
 
             //6. turn left
-            turnLeft(50.0, 0.75);
+            turnLeft(30, 0.75);
 
             //7. move forward
             encoderDriveAdj(-57, 0.75, 135, 8);
 
             placeMarker();
 
-            encoderDriveAdj(88, 0.75, 135, 8);
+            encoderDriveAdj(88, 0.75, 138.25, 4);
 
             //8. parking (extent and rotate arm)
-            //rotateArm(2000, 0.8);
+            rotateArm(4300, 0.8);
 
         }
 
@@ -771,6 +773,9 @@ public class MyAutonomousBase extends LinearOpMode {
     // negative distance indicates driving backwards
     public void encoderDriveAdj(double distance, double maxPwr, double targetHeading, double time) {
 
+        robot.rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
         robot.leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -787,12 +792,14 @@ public class MyAutonomousBase extends LinearOpMode {
         double power = maxPwr;
 
         // slopes for proportional speed increase/decrease
-        double decSlope = (maxPwr - robot.MINIMUM_DRIVE_PWR) / (robot.DECELERATION_THRESHOLD);
+        double decSlope = (maxPwr - robot.MINIMUM_DRIVE_PWR) / Math.abs(distance);
 
         double initTime = runtime.seconds();
         double targetTime = initTime + time;
 
         while (Math.abs(currentRobotPos) < Math.abs(targetPos) && runtime.seconds() < targetTime){
+
+            angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
             double curPosR = robot.rightRear.getCurrentPosition() - initPosR;
             double curPosL = robot.leftRear.getCurrentPosition() - initPosL;
@@ -809,13 +816,24 @@ public class MyAutonomousBase extends LinearOpMode {
 
             double gyroCorrectionPwr = GYRO_CORRECTION_FACTOR * computeGyroDriveCorrectionError(targetHeading, currentHeading);
 
-            robot.rightRear.setPower(distanceSign * power - (gyroCorrectionPwr * distanceSign));
-            robot.leftRear.setPower(distanceSign * power - (gyroCorrectionPwr * distanceSign));
+            /*
+            if ((distance <= 0 && targetHeading <= 0) || (distance <= 0 && targetHeading >= 0)) {
+                robot.rightRear.setPower(distanceSign * power - (gyroCorrectionPwr * distanceSign));
+                robot.leftRear.setPower(distanceSign * power + (gyroCorrectionPwr * distanceSign));
+            } else {
+                robot.rightRear.setPower(distanceSign * power + (gyroCorrectionPwr * distanceSign));
+                robot.leftRear.setPower(distanceSign * power - (gyroCorrectionPwr * distanceSign));
+            }
+            */
+
+            robot.rightRear.setPower((power - (gyroCorrectionPwr * distanceSign)) * distanceSign);
+            robot.leftRear.setPower((power + (gyroCorrectionPwr * distanceSign)) * distanceSign);
 
             telemetry.addData(">", "target position = " + targetPos);
             telemetry.addData(">", "current robot pos = " + currentRobotPos);
             telemetry.addData(">", "right motor encoder pos = " + curPosR);
             telemetry.addData(">", "left motor encoder pos = " + curPosL);
+            telemetry.addData("gyro", "current gyro heading = " + currentHeading);
             telemetry.update();
 
         }
@@ -848,7 +866,7 @@ public class MyAutonomousBase extends LinearOpMode {
     public void rotateArm(double counts, double power) {
 
         double initPos = robot.rotationMotor.getCurrentPosition();
-        double targetPos = initPos + counts;
+        double targetPos = counts;
 
         double curPos = 0.0;
 

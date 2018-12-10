@@ -21,8 +21,8 @@ public class MyCraterAutonomous extends MyAutonomousBase {
         telemetry.addData(">","gold Pos = " + goldPos);
         telemetry.update();
 
-        /*craterSample(goldPos);
-*/
+        craterSample(goldPos);
+
         }
 
 }
