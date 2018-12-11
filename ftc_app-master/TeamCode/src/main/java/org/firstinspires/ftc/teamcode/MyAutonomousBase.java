@@ -736,8 +736,8 @@ public class MyAutonomousBase extends LinearOpMode {
 
         robot.markerServo.setPosition(robot.MARKER_PLACE);
         sleep(500);
-        robot.markerServo.setPosition(robot.MARKER_START);
-        sleep(250);
+        //robot.markerServo.setPosition(robot.MARKER_START);
+        //sleep(250);
     }
 
     // power should always be POSITIVE

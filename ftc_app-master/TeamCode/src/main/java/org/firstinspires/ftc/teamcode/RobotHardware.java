@@ -26,8 +26,8 @@ public class RobotHardware {
     final double RIGHT_OPEN = 0.7;
     final double LEFT_CLOSE = 0.5;
     final double RIGHT_CLOSE = 0.5;
-    final double MARKER_START = 0.8;
-    final double MARKER_PLACE = 0.3;
+    final double MARKER_START = 0.6;
+    final double MARKER_PLACE = 0;
 
     // arm variables (TBD, find accurate values through testing)
     final double EXTENSION_POWER = 0.5;
